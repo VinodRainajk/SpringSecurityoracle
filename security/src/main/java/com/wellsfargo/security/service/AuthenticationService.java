@@ -24,11 +24,11 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse authenticate(AuthRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail_id(),request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
 
         );
 
-        var user =userRepository.findByemail_id(request.getEmail_id())
+        var user =userRepository.findByemail(request.getEmail())
                 .orElseThrow();
 
         var jwttoken = jwtService.generateToken(user);
@@ -39,7 +39,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         var user = user_custom.builder()
                 .name(request.getName())
-                .email_id(request.getEmail_id())
+                .email(request.getEmail())
                 .password(passwordEnoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();

@@ -23,7 +23,7 @@ public class user_custom implements UserDetails {
     @GeneratedValue
     int id;
     String name;
-    String email_id;
+    String email;
     String password;
 
     @Enumerated(EnumType.STRING)
@@ -36,7 +36,7 @@ public class user_custom implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email_id;
+        return email;
     }
 
     @Override
